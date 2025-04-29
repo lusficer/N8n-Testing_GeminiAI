@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Send Message to n8n Webhook via Proxy</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .container {
+        text-align: center;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+      }
+      input[type="text"] {
+        padding: 10px;
+        width: 100%;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      #response {
+        margin-top: 20px;
+        color: #333;
+        text-align: left;
+        white-space: pre-wrap;
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Gửi Tin Nhắn đến n8n</h2>
+      <input type="text" id="messageInput" placeholder="Nhập tin nhắn" />
+      <button onclick="sendMessage()">Gửi</button>
+      <div id="response">Phản hồi hoặc lỗi sẽ hiển thị ở đây...</div>
+    </div>
+
+    <script>
+      async function sendMessage() {
+        const messageInput = document.getElementById("messageInput").value;
+        if (!messageInput) {
+          alert("Vui lòng nhập tin nhắn!");
+          return;
+        }
+
+        logMessage("Đang gửi yêu cầu...");
+
+        try {
+          const response = await fetch(
+            "http://localhost:5678/webhook/b7ae2aab-b12c-4041-a2d0-fae81ab19fc0",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ message: messageInput }),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const result = await response.json();
+          logMessage("Phản hồi từ n8n:\n" + JSON.stringify(result, null, 2));
+
+          let reply;
+          if (result.reply) {
+            reply = result.reply;
+          } else if (Array.isArray(result) && result[0]?.output) {
+            reply = result[0].output;
+          } else {
+            throw new Error("Phản hồi không đúng định dạng");
+          }
+
+          logMessage("AI Trả lời: " + reply);
+        } catch (error) {
+          logMessage("Lỗi: " + error.message);
+        }
+      }
+
+      function logMessage(message) {
+        const responseDiv = document.getElementById("response");
+        responseDiv.innerText += `\n[${new Date().toISOString()}] ${message}`;
+        responseDiv.scrollTop = responseDiv.scrollHeight;
+      }
+
+      // Ngăn làm mới trang
+      window.onbeforeunload = function (event) {
+        event.preventDefault();
+        return "";
+      };
+    </script>
+  </body>
+</html>

@@ -13,6 +13,8 @@ services:
       - DB_TYPE=sqlite
       - DB_SQLITE_DATABASE_FILENAME=/home/node/.n8n/database.sqlite
       - GENERIC_TIMEZONE=Asia/Ho_Chi_Minh
+      - N8N_CORS_ENABLED=true
+      - N8N_CORS_ORIGIN=*
     volumes:
       - ./n8n-edu1:/home/node/.n8n
       - ./daily-data:/data
