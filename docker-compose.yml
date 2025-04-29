@@ -1,0 +1,71 @@
+services:
+  n8n-edu1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: n8n-edu1
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin1
+      - N8N_BASIC_AUTH_PASSWORD=pass1
+      - DB_TYPE=sqlite
+      - DB_SQLITE_DATABASE_FILENAME=/home/node/.n8n/database.sqlite
+      - GENERIC_TIMEZONE=Asia/Ho_Chi_Minh
+    volumes:
+      - ./n8n-edu1:/home/node/.n8n
+      - ./daily-data:/data
+    networks:
+      - n8n-network
+
+  # n8n-edu2:
+  #   image: n8nio/n8n
+  #   container_name: n8n-edu2
+  #   ports:
+  #     - "5679:5678"
+  #   environment:
+  #     - N8N_BASIC_AUTH_ACTIVE=true
+  #     - N8N_BASIC_AUTH_USER=admin2
+  #     - N8N_BASIC_AUTH_PASSWORD=pass2
+  #     - DB_TYPE=sqlite
+  #     - DB_SQLITE_DATABASE_FILENAME=/home/node/.n8n/database.sqlite
+  #     - GENERIC_TIMEZONE=Asia/Ho_Chi_Minh
+  #   volumes:
+  #     - ./n8n-edu2:/home/node/.n8n
+  #   networks:
+  #     - n8n-network
+
+  # n8n-edu3:
+  #   image: n8nio/n8n
+  #   container_name: n8n-edu3
+  #   ports:
+  #     - "5680:5678"
+  #   environment:
+  #     - N8N_BASIC_AUTH_ACTIVE=true
+  #     - N8N_BASIC_AUTH_USER=admin3
+  #     - N8N_BASIC_AUTH_PASSWORD=pass3
+  #     - DB_TYPE=sqlite
+  #     - DB_SQLITE_DATABASE_FILENAME=/home/node/.n8n/database.sqlite
+  #     - GENERIC_TIMEZONE=Asia/Ho_Chi_Minh
+  #   volumes:
+  #     - ./n8n-edu3:/home/node/.n8n
+  #   networks:
+  #     - n8n-network
+
+  sqlite:
+    image: nouchka/sqlite3
+    container_name: sqlite
+    volumes:
+      - ./daily-data:/data
+    networks:
+      - n8n-network
+    entrypoint: /bin/sh
+    command: -c "tail -f /dev/null"
+
+networks:
+  n8n-network:
+    driver: bridge
+
+volumes:
+  daily-data:
