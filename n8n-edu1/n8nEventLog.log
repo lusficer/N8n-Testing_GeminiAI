@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {"__type":"$$EventMessageWorkflow","id":"0cb84966-3f9b-4588-973e-5f05899f27ac","ts":"2025-04-29T13:18:10.043+07:00","eventName":"n8n.workflow.started","message":"n8n.workflow.started","payload":{"executionId":"193","workflowId":"FTqAW6xodytOefMp","isManual":false,"workflowName":"My workflow"}}
 {"__type":"$$EventMessageConfirm","confirm":"0cb84966-3f9b-4588-973e-5f05899f27ac","ts":"2025-04-29T13:18:10.044+07:00","source":{"id":"0","name":"eventBus"}}
 {"__type":"$$EventMessageNode","id":"62d9801f-3e12-483c-961a-8428403c6488","ts":"2025-04-29T13:18:10.050+07:00","eventName":"n8n.node.started","message":"n8n.node.started","payload":{"workflowId":"FTqAW6xodytOefMp","workflowName":"My workflow","executionId":"193","nodeType":"n8n-nodes-base.webhook","nodeName":"Webhook"}}
@@ -1228,3 +1229,7 @@
 {"__type":"$$EventMessageConfirm","confirm":"eb630222-7f1f-44be-8d80-a7788bca683d","ts":"2025-04-29T13:52:24.486+07:00","source":{"id":"0","name":"eventBus"}}
 {"__type":"$$EventMessageWorkflow","id":"1737bf04-cbe7-42bc-b3eb-e21efc2a4eaa","ts":"2025-04-29T13:52:24.486+07:00","eventName":"n8n.workflow.success","message":"n8n.workflow.success","payload":{"executionId":"219","success":true,"isManual":false,"workflowId":"FTqAW6xodytOefMp","workflowName":"My workflow"}}
 {"__type":"$$EventMessageConfirm","confirm":"1737bf04-cbe7-42bc-b3eb-e21efc2a4eaa","ts":"2025-04-29T13:52:24.487+07:00","source":{"id":"0","name":"eventBus"}}
+=======
+{"__type":"$$EventMessageAudit","id":"79e6b8e7-20ea-4326-833c-34cfcdb5d2ac","ts":"2025-05-15T06:21:02.318+00:00","eventName":"n8n.audit.user.credentials.created","message":"n8n.audit.user.credentials.created","payload":{"userId":"14381e2a-3cff-46f5-81ae-da4b6779d256","_email":"admin@gmail.com","_firstName":"admin","_lastName":"aq","globalRole":"global:owner","credentialType":"googlePalmApi","credentialId":"3uuPZL9ERtaSUsUH","publicApi":false,"projectId":"h7aLf6sfJB2ZhNJy","projectType":"personal"}}
+{"__type":"$$EventMessageConfirm","confirm":"79e6b8e7-20ea-4326-833c-34cfcdb5d2ac","ts":"2025-05-15T06:21:02.407+00:00","source":{"id":"0","name":"eventBus"}}
+>>>>>>> d83ac9cf7ba17bbb840a65cae1afc460135476eb
