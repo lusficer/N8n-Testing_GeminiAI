@@ -1,0 +1,34 @@
+# n8n data directories
+n8n-edu1/
+
+# Data directory
+daily-data/
+
+# Docker related
+.docker/
+docker-compose.override.yml
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.*
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/ 
